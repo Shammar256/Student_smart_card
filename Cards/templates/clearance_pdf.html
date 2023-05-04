@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleared Students PDF</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+    <h2><center><b>Cleared Students</b></center></h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#.</th>
+                <th scope="col">Card</th>
+                <th scope="col">Semester</th>
+                <th scope="col">Year of study</th>
+                <th scope="col">Academic year</th>
+                <th scope="col">Is test cleared</th>
+                <th scope="col">Is exam cleared</th>
+                <th scope="col">Is library cleared</th>
+            </tr>
+        </thead>
+    
+            <tbody>
+                {% for clearance in clearances %}
+                        <tr> 
+                            <td scope="row">{{clearance.id}}</td>
+                            <td>{{Clearance.card}}</td>
+                            <td>{{Clearance.semester}}</td>
+                            <td>{{Clearance.year_of_study}}</td>
+                            <td>{{Clearance.academic_year}}</td>
+                            <td>{{Clearance.is_test_cleared}}</td>
+                            <td>{{Clearance.is_exam_cleared}}</td>
+                            <td>{{Clearance.is_library_cleared}}</td>
+                            <td>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
+                                

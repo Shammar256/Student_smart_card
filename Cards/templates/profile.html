@@ -1,0 +1,30 @@
+{% extends './base2.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+			<title>Personal Profile</title>
+			<style>
+				h1 {
+					text-align: center;
+				}
+			</style>
+		</head>
+		<body>
+			<h1>My Personal Profile</h1>
+			<img src="your-profile-picture.jpg" alt="Your Profile Picture">
+			<h2>Personal Information</h2>
+			<ul>
+				<li><strong>Name:</strong> Your Name</li>
+				<li><strong>Age:</strong> Your Age</li>
+				<li><strong>Location:</strong> Your Location</li>
+				<li><strong>Email:</strong> Your Email</li>
+			</ul>
+			<h2>Interests</h2>
+			<ul>
+				<li>Interest 1</li>
+				<li>Interest 2</li>
+				<li>Interest 3</li>
+			</ul>
+			<h2>About Me</h2>
+			<p>Write a brief description about yourself here.</p>
+{% endblock content %}

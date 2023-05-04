@@ -1,0 +1,69 @@
+{% extends './base2.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+        {% if msg %}
+        {{msg}}
+        {% endif %}
+                
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                Add Clearance
+                </button>
+    <div class="modal fade" id="basicModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Clearance</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                            {% csrf_token %}   
+                            {{form|crispy}}
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary"></button>
+                        <a href=""></a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#.</th>
+                    <th scope="col">Card</th>
+                    <th scope="col">Semester</th>
+                    <th scope="col">Year of study</th>
+                    <th scope="col">Academic year</th>
+                    <th scope="col">Is test cleared</th>
+                    <th scope="col">Is exam cleared</th>
+                    <th scope="col">Is library cleared</th>
+                </tr>
+            </thead>
+        
+            <tbody>
+                {% for Clearance in clearances %}
+                    <tr> 
+                        <td scope="row">{{Clearance.id}}</td>
+                        <td>{{Clearance.card}}</td>
+                        <td>{{Clearance.semester}}</td>
+                        <td>{{Clearance.year_of_study}}</td>
+                        <td>{{Clearance.academic_year}}</td>
+                        <td>{{Clearance.is_test_cleared}}</td>
+                        <td>{{Clearance.is_exam_cleared}}</td>
+                        <td>{{Clearance.is_library_cleared}}</td>
+
+                        <td>
+                            <a href="{% url 'edit_clearance_page' Clearance.id %}">Edit</a> |
+                            <a href="{% url 'delete_clearance_page' Clearance.id %}"
+                            onclick ="return confirm('Are you sure to delete this Clearance')">
+                            Delete
+                            </a>
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock content %}

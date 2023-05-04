@@ -1,0 +1,66 @@
+{% extends './base2.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+            {% if msg %}
+            {{msg}}
+            {% endif %}
+                
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                Add Fees
+                </button>
+    <div class="modal fade" id="basicModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Fees Structure</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                            {% csrf_token %}   
+                            {{form|crispy}}
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary"></button>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Academic_year</th>
+                    <th scope="col">Year_of_study</th>
+                    <th scope="col">Semester</th>
+                    <th scope="col">Functional_fees</th>
+                    <th scope="col">Course</th>
+                </tr>
+            </thead>
+                <tbody>
+                    {% for feesstructure in feesstructures %}
+                        <tr>
+                            <th scope="row">{{feesstructure.id}}</th>
+                            <td>{{feesstructure.academic_year}}</td>
+                            <td>{{feesstructure.year_of_study}}</td>
+                            <td>{{feesstructure.semester}}</td>
+                            <td>{{feesstructure.functional_fees}}</td>
+                            <td>{{feesstructure.course}}</td>
+                            <td>
+                                <a href="{% url 'edit_feesstructure_page' feesstructure.id %}">Edit</a> |
+                                <a href="{% url 'delete_feesstructure_page' feesstructure.id %}"
+                                onclick ="return confirm('Are you sure to delete this Structure')">
+                                Delete
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+    
+    <a href="{% url 'index_page' %}">HOME</a>
+
+{% endblock content %}

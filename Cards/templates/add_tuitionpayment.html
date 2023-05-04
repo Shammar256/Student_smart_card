@@ -1,0 +1,62 @@
+{% extends './base2.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% if msg %}
+{{msg}}
+{% endif %}
+                
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                Add Tuition
+                </button>
+    <div class="modal fade" id="basicModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tuition Payment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                            {% csrf_token %}   
+                            {{form|crispy}}
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Fees_structure</th>
+                    <th scope="col">Amount_paid</th>
+                    <th scope="col">Payment_date</th>
+                    <th scope="col">Student</th>
+                </tr>
+            </thead>
+                <tbody>
+                    {% for tuitionpayment in tuitionpayments %}
+                        <tr>
+                            <th scope="row">{{tuitionpayment.id}}</th>
+                            <td>{{tuitionpayment.fees_structure}}</td>
+                            <td>{{tuitionpayment.amount_paid}}</td>
+                            <td>{{tuitionpayment.payment_date}}</td>
+                            <td>{{tuitionpayment.student}}</td>
+                            <td>
+                                <a href="{% url 'edit_tuitionpayment_page' tuitionpayment.id %}">Edit</a> |
+                                <a href="{% url 'delete_tuitionpayment_page' tuitionpayment.id %}"
+                                onclick ="return confirm('Are you sure to delete this Tuition')">
+                                Delete
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+   
+    <a href="{% url 'index_page' %}">HOME</a>
+{% endblock content %}

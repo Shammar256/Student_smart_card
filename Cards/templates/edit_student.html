@@ -1,0 +1,36 @@
+{% extends './base2.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h2>Edit - {{student.student_name}}</h2>
+    <div class="container">        
+        <form method="POST">
+            {% if msg %}
+                {{msg}}
+            {% endif %}
+                            
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                            Edit Student
+                            </button>
+                <div class="modal fade" id="basicModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Student</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST">
+                                        {% csrf_token %}   
+                                        {{form|crispy}}
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <input type="submit" class="btn btn-primary"></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </form>
+         
+    </div>
+{% endblock content %}

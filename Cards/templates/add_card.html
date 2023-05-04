@@ -1,0 +1,61 @@
+{% extends './base2.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+                    {% if msg %}
+                    {{msg}}
+                    {% endif %}
+                    
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                    Add Card
+                    </button>
+            <div class="modal fade" id="basicModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add Card</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <form method="POST">
+                            {% csrf_token %}   
+                            {{form|crispy}}
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary"></button>
+                        <button type="button" class="btn btn-primary" >PDF</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#.</th>
+                        <th scope="col">Student</th>
+                        <th scope="col">Status</th>                   
+                    </tr>
+                </thead>
+            
+                <tbody>
+                    {% for Card in cards %}
+                        <tr> 
+                            <td scope="row">{{Card.id}}</td>
+                            <td>{{Card.student}}</td>
+                            <td>{{Card.status}}</td>
+    
+                            <td>
+                                <a href="{% url 'edit_card_page' Card.id %}">Edit</a> | 
+                                <a href="{% url 'delete_card_page' Card.id %}"
+                                onclick ="return confirm('Are you sure to delete this Card')">
+                                Delete</a>
+                            </td>
+                            
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    
+            
+        </div>
+{% endblock content %} 

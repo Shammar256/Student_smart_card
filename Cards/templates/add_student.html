@@ -1,0 +1,75 @@
+{% extends './base2.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+            {% if msg %}
+              {{msg}}
+            {% endif %}
+                
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                Add Student
+                </button>
+    <div class="modal fade" id="basicModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Student</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                            {% csrf_token %}   
+                            {{form|crispy}}
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#.</th>
+                        <th scope="col">Std_Name</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Session</th>
+                        <th scope="col">D.O.B</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Religion</th>
+                        <th scope="col">Tel:</th>
+                        <th scope="col">Nationality</th>
+                        <th scope="col">Marital_status</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        {% for student in students %}
+                            <tr>
+                                <th scope="row">{{student.id}}</th>
+                                <td>{{student.student_name}}</td>
+                                <td>{{student.gender}}</td>
+                                <td>{{student.course}}</td>
+                                <td>{{student.session}}</td>
+                                <td>{{student.date_of_birth}}</td>
+                                <td>{{student.address}}</td>
+                                <td>{{student.religion}}</td>
+                                <td>{{student.telephone_no}}</td>
+                                <td>{{student.nationality}}</td>
+                                <td>{{student.marital_status}}</td>
+                                <td>
+                                    <a href="{% url 'edit_student_page' student.id %}">Edit</a> |
+                                    <a href="{% url 'delete_student_page' student.id %}"
+                                    onclick ="return confirm('Are you sure to delete this Student')">
+                                    Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+        
+        <a href="{% url 'index_page' %}">HOME</a>
+{% endblock content %}

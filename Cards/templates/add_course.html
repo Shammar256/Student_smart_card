@@ -1,0 +1,63 @@
+{% extends './base2.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+                        {% if msg %}
+                          {{msg}}
+                        {% endif %}
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                Add Course
+              </button>
+              <div class="modal fade" id="basicModal" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Add Course</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                                {% csrf_token %}   
+                                {{form|crispy}}
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary"></button>
+                            
+                        </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Course name</th>
+                            <th scope="col">Faculty</th>
+                            <th scope="col">Course code</th>
+                            <th scope="col">Duration</th>
+                        </tr>
+                    </thead>
+                
+                    <tbody>
+                        {% for Course in courses %}
+                            <tr> 
+                                <td scope="row">{{Course.id}}</td>
+                                <td>{{Course.course_name}}</td>
+                                <td>{{Course.faculty}}</td>
+                                <td>{{Course.course_code}}</td>
+                                <td>{{Course.duration}}</td>
+
+                                <td>
+                                    <a href="{% url 'edit_course_page' Course.id %}">Edit</a> |
+                                    <a href="{% url 'delete_course_page' Course.id %}"
+                                    onclick ="return confirm('Are you sure to delete this Course')">
+                                    Delete
+                                    </a>
+                                </td>
+                                
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+{% endblock content %}
+                

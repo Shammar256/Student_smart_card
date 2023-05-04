@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student PDF</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+    <h2><center><b>Student List</b></center></h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#.</th>
+                <th scope="col">Std_Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Course</th>
+                <th scope="col">Session</th>
+                <th scope="col">D.O.B</th>
+                <th scope="col">Address</th>
+                <th scope="col">Religion</th>
+                <th scope="col">Tel:</th>
+                <th scope="col">Nationality</th>
+                <th scope="col">Marital_status</th>
+            </tr>
+        </thead>
+            <tbody>
+                {% for student in students %}
+                    <tr>
+                        <th scope="row">{{student.id}}</th>
+                        <td>{{student.student_name}}</td>
+                        <td>{{student.gender}}</td>
+                        <td>{{student.course}}</td>
+                        <td>{{student.session}}</td>
+                        <td>{{student.date_of_birth}}</td>
+                        <td>{{student.address}}</td>
+                        <td>{{student.religion}}</td>
+                        <td>{{student.telephone_no}}</td>
+                        <td>{{student.nationality}}</td>
+                        <td>{{student.marital_status}}</td>
+                        <td>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
+                          
