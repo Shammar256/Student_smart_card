@@ -36,7 +36,7 @@ def add_course_view(request):
     
     context = {
         'form':course_form,
-        'msg' :message,
+        'msg' :messages,
         'courses' :courses
     }
     return render(request, "add_course.html", context)
@@ -59,7 +59,7 @@ def edit_course_view(request, course_id):
     context = {
         'form': course_form,
         'course': course,
-        'message':message,
+        'message':messages,
     }
     return render(request, 'edit_course.html', context)
     
@@ -81,7 +81,7 @@ def add_student_view(request):
 
     context = {
         'form' : student_form,
-        'msg' : message,
+        'msg' : messages,
         'students' : students,
     }
 
@@ -109,7 +109,7 @@ def edit_student_view(request, student_id):
     context = {
         'form' : student_form,
         'student' : student,
-        'msg' : message,
+        'msg' : messages,
     }
 
     return render(request, 'edit_student.html', context)
